@@ -5,6 +5,7 @@ using Osmi.Game;
 namespace Osmi.Exports;
 
 [ModExportName("HealthShare")]
+[PublicAPI]
 public static class HealthShareExport {
 	public static bool IsSharing(HealthManager self) => self.IsSharing();
 

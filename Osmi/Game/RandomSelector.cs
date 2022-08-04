@@ -79,16 +79,17 @@ public class RandomSelector<T> {
 		}
 	}
 
+	[PublicAPI]
 	public sealed class SelectionItem {
 		public T value;
 
 		public Func<float> weight;
 
 		public Func<int> comboMax;
-		internal int combo = 0;
+		internal int combo;
 
 		public Func<int> missedMax;
-		internal int missed = 0;
+		internal int missed;
 
 		public SelectionItem(T value, float weight = 1, int comboMax = 0, int missedMax = 0)
 			: this(value, Funcs.Constant(weight), Funcs.Constant(comboMax), Funcs.Constant(missedMax)) {

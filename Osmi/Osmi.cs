@@ -3,6 +3,7 @@ using Osmi.Game;
 
 namespace Osmi;
 
+[PublicAPI]
 public sealed class Osmi : Mod {
 	public static Osmi? Instance { get; private set; }
 

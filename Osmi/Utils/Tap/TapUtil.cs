@@ -12,7 +12,7 @@ public static class TapUtil {
 
 
 	public static Func<T, Action<T>, T> TapFunc<T>() =>
-		(T t, Action<T> f) => t.Tap(f);
+		(t, f) => t.Tap(f);
 
 	public static Func<Action<T>, T> TapFunc<T>(this T self) =>
 		TapFunc<T>().Bind1(self);

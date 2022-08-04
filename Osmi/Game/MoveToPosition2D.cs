@@ -1,3 +1,5 @@
+using Osmi.ChildRefs;
+
 namespace Osmi.Game;
 
 #pragma warning disable IDE0051
@@ -5,15 +7,15 @@ namespace Osmi.Game;
 [PublicAPI]
 [RequireComponent(typeof(Rigidbody2D))]
 public class MoveToPosition2D : MonoBehaviour {
-	private Rigidbody2D rb = null!;
+	[ChildRef] private readonly Rigidbody2D rb = null!;
 
-	public virtual Vector2? TargetPos { get; set; } = null;
+	public virtual Vector2? TargetPos { get; set; }
 
-	public float accelerationForce = 0;
-	public float maxVelocity = 0;
+	public float accelerationForce;
+	public float maxVelocity;
 
 
-	private void Start() => rb = GetComponent<Rigidbody2D>();
+	private void Start() => this.InitChildRefs();
 
 	private void FixedUpdate() {
 		if (!TargetPos.HasValue || rb.bodyType != RigidbodyType2D.Dynamic) {
@@ -25,7 +27,7 @@ public class MoveToPosition2D : MonoBehaviour {
 			return;
 		}
 
-		rb.AddForce(relPos.GetUnitVector() * accelerationForce);
+		rb.AddForce(relPos.normalized * accelerationForce);
 		rb.velocity = Vector2.ClampMagnitude(rb.velocity, maxVelocity);
 	}
 }

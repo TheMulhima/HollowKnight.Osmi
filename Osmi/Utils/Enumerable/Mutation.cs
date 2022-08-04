@@ -28,10 +28,10 @@ public static partial class EnumerableUtil {
 	}
 
 
-	public static IEnumerable<T> Order<T, U>(this IEnumerable<T> self) =>
+	public static IEnumerable<T> Order<T>(this IEnumerable<T> self) =>
 		self.OrderBy(Funcs.Identity);
 
-	public static IEnumerable<T> OrderDescending<T, U>(this IEnumerable<T> self) =>
+	public static IEnumerable<T> OrderDescending<T>(this IEnumerable<T> self) =>
 		self.OrderByDescending(Funcs.Identity);
 
 

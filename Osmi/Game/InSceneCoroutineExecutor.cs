@@ -1,5 +1,6 @@
 namespace Osmi.Game;
 
+[PublicAPI]
 public sealed class InSceneCoroutineExecutor : MonoBehaviour {
 	private static readonly InSceneCoroutineExecutor instance
 		= GameObjectUtil.CreateHolder<InSceneCoroutineExecutor>("In Scene Coroutine Executor");

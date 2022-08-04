@@ -13,7 +13,7 @@ public class ChaseObject : MoveToPosition2D {
 	}
 
 	private bool isNull = true;
-	private Transform? tf = null!;
+	private Transform? tf;
 
 	public Transform? Target {
 		get => tf;

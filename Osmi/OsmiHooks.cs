@@ -15,7 +15,7 @@ public static class OsmiHooks {
 	public static event Action GameInitializedHook {
 		add {
 			if (gameInitializedHookCalled) {
-				value?.Invoke();
+				value.Invoke();
 				return;
 			}
 
@@ -23,7 +23,7 @@ public static class OsmiHooks {
 		}
 		remove => InternalGameInitializedHook -= value;
 	}
-	private static bool gameInitializedHookCalled = false;
+	private static bool gameInitializedHookCalled;
 	private static event Action InternalGameInitializedHook = null!;
 
 	internal static IEnumerator CheckGameInitialized() {

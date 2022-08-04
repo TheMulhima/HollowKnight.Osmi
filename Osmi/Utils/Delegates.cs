@@ -7,17 +7,17 @@ public static class Delegates {
 	public static Action<T> Drop<T>() => Funcs.Drop;
 
 	public static Action NoOp() => Funcs.NoOp;
-	public static Action<A> NoOp<A>() => (A a) => { };
-	public static Action<A, B> NoOp<A, B>() => (A a, B b) => { };
-	public static Action<A, B, C> NoOp<A, B, C>() => (A a, B b, C c) => { };
+	public static Action<A> NoOp<A>() => (_) => { };
+	public static Action<A, B> NoOp<A, B>() => (_, _) => { };
+	public static Action<A, B, C> NoOp<A, B, C>() => (_, _, _) => { };
 
-	public static Func<A, bool> Pass<A>() => (A a) => true;
-	public static Func<A, B, bool> Pass<A, B>() => (A a, B b) => true;
-	public static Func<A, B, C, bool> Pass<A, B, C>() => (A a, B b, C c) => true;
+	public static Func<A, bool> Pass<A>() => (_) => true;
+	public static Func<A, B, bool> Pass<A, B>() => (_, _) => true;
+	public static Func<A, B, C, bool> Pass<A, B, C>() => (_, _, _) => true;
 
-	public static Func<A, bool> Block<A>() => (A a) => false;
-	public static Func<A, B, bool> Block<A, B>() => (A a, B b) => false;
-	public static Func<A, B, C, bool> Block<A, B, C>() => (A a, B b, C c) => false;
+	public static Func<A, bool> Block<A>() => (_) => false;
+	public static Func<A, B, bool> Block<A, B>() => (_, _) => false;
+	public static Func<A, B, C, bool> Block<A, B, C>() => (_, _, _) => false;
 
 	public static Func<T?> Default<T>() => Funcs.Default<T>;
 

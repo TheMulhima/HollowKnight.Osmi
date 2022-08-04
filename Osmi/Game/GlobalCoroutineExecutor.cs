@@ -1,5 +1,6 @@
 namespace Osmi.Game;
 
+[PublicAPI]
 public sealed class GlobalCoroutineExecutor : MonoBehaviour {
 	private static readonly GlobalCoroutineExecutor instance
 		= GameObjectUtil.CreateHolder<GlobalCoroutineExecutor>("Global Coroutine Executor");

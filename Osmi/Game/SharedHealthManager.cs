@@ -153,7 +153,7 @@ public class SharedHealthManager : MonoBehaviour {
 	#region Damage Proxy
 
 	private static readonly object lockObj = new();
-	private static int instanceCount = 0;
+	private static int instanceCount;
 
 	public static int InstanceCount {
 		get => instanceCount;
