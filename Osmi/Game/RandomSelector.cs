@@ -8,9 +8,12 @@ public class RandomSelector<T> {
 	public int ItemCount => items.Count;
 
 
-	public RandomSelector() : this(new()) { }
+	public RandomSelector() : this(new List<SelectionItem>()) { }
 
 	public RandomSelector(List<SelectionItem> items) => this.items = items;
+
+	public RandomSelector(params SelectionItem[] items) => this.items = items.ToList();
+
 
 	public void AddItem(SelectionItem item) => items.Add(item);
 
@@ -118,7 +121,7 @@ public class RandomSelector<T> {
 			new(item, item.weight(), item.comboMax(), item.missedMax());
 	}
 
-	internal class SelectionItemInfo {
+	internal sealed class SelectionItemInfo {
 		internal readonly SelectionItem item;
 		internal readonly float weight;
 		internal readonly int comboMax;
