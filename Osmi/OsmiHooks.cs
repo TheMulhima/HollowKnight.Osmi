@@ -92,12 +92,6 @@ public static class OsmiHooks {
 		}
 	}
 
-	private static void HookOnAfterEnterSave(On.HeroController.orig_Start orig, HeroController self) {
-		orig(self);
-		Ref.GM.OnFinishedEnteringScene -= OnAfterEnterSave;
-		Ref.GM.OnFinishedEnteringScene += OnAfterEnterSave;
-	}
-
 
 	/// <summary>
 	///	Equivalent to
@@ -201,7 +195,11 @@ public static class OsmiHooks {
 	static OsmiHooks() {
 		GameInitializedHook += () => UIManager.EditMenus += OnMenuBuild;
 
-		On.HeroController.Start += HookOnAfterEnterSave;
+		On.HeroController.Start += (orig, self) => {
+			orig(self);
+			Ref.GM.OnFinishedEnteringScene -= OnAfterEnterSave;
+			Ref.GM.OnFinishedEnteringScene += OnAfterEnterSave;
+		};
 
 		USceneManager.activeSceneChanged += OnSceneChange;
 
