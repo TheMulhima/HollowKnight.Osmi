@@ -1,6 +1,5 @@
 namespace Osmi.Utils;
 
-[PublicAPI]
 public static partial class FuncUtil {
 	public static Func<U> Thru<T, U>(this Func<T> self, Func<T, U> f) =>
 		() => f(self());
