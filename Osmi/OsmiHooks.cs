@@ -4,6 +4,8 @@ using MonoMod.Cil;
 using MonoMod.RuntimeDetour;
 using MonoMod.Utils;
 
+using Osmi.Game;
+
 namespace Osmi;
 
 [PublicAPI]
@@ -192,6 +194,29 @@ public static class OsmiHooks {
 	}
 
 
+	/// <summary>
+	/// Called when the Player dies. Unlike <see cref="ModHooks.BeforePlayerDeadHook"/>,
+	/// dream death will also trigger this
+	/// </summary>
+	public static event Action<GameObject> PlayerDeathHook = null!;
+
+	private static void OnPlayerDeath(CustomBehaviour behaviour) {
+		Logger.LogFine($"{nameof(OnPlayerDeath)} Invoked");
+
+		if (PlayerDeathHook == null) {
+			return;
+		}
+
+		foreach (Action<GameObject> a in PlayerDeathHook.GetInvocationList()) {
+			try {
+				a.Invoke(behaviour.gameObject);
+			} catch (Exception e) {
+				Logger.LogError(e.ToString());
+			}
+		}
+	}
+
+
 	static OsmiHooks() {
 		GameInitializedHook += () => UIManager.EditMenus += OnMenuBuild;
 
@@ -231,5 +256,10 @@ public static class OsmiHooks {
 				)
 				.Emit(OpCodes.Call, ((Delegate) OnGameUnpause).Method)
 		);
+
+		On.HeroController.Start += (orig, self) => {
+			orig(self);
+			self.heroDeathPrefab.AddComponent<CustomBehaviour>().OnEnableEvent += OnPlayerDeath;
+		};
 	}
 }
